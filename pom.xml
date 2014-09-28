@@ -16,6 +16,7 @@
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
+				<version>3.1</version>
 			</plugin>
 		</plugins>
 		
@@ -31,6 +32,13 @@
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 	</properties>
+	
+	<repositories>
+	<repository>
+        <id>alvins-releases</id>
+        <url>https://github.com/alvins82/mvn-repo/raw/master/releases</url>
+    </repository>
+    </repositories>
 
 	<dependencies>
 		<dependency>
