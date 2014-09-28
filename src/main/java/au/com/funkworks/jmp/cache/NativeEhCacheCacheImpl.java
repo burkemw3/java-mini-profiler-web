@@ -20,7 +20,7 @@ public class NativeEhCacheCacheImpl implements CacheProfilerService {
 		cache = new Cache(  
 		     new CacheConfiguration("profilerCache", 5000)  
 		       .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LRU)  
-		       .overflowToDisk(true)  
+		       .overflowToDisk(false)
 		       .eternal(false)  
 		       .timeToLiveSeconds(60)  
 		       .timeToIdleSeconds(30)  
