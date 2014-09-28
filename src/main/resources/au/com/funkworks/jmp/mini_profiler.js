@@ -116,6 +116,7 @@ var MiniProfiler = ( function() {
   }
 
   return {
-    init : init
+    init : init,
+    getProfileInformation : getProfileInformation
   };
 }() );
