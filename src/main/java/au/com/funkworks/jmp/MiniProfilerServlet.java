@@ -62,7 +62,6 @@ public class MiniProfilerServlet extends HttpServlet {
 	private static final long serialVersionUID = 7906645907029238585L;
 
 	private static final String HTML_ID_PREFIX_KEY = "htmlIdPrefix";
-
 	private static final String RESOURCE_CACHE_HOURS_KEY = "resourceCacheHours";
 
 	private static final String servletURL = "/java_mini_profile/";
@@ -115,7 +114,7 @@ public class MiniProfilerServlet extends HttpServlet {
 
 		resourceLoader = new MiniProfilerResourceLoader();
 		resourceReplacements.put("@@prefix@@", htmlIdPrefix);
-		resourceReplacements.put("@@baseURL@@", servletURL);
+		resourceReplacements.put("@@baseURL@@", config.getServletContext().getContextPath() + servletURL);
 		resourceReplacements.put("@@prefix@@", htmlIdPrefix);
 		logger.debug("Init'ed mini-profiler servlet");
 	}
