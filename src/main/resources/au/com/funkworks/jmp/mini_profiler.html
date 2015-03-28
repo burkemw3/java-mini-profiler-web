@@ -19,10 +19,10 @@
 <script type="text/html" id="@@prefix@@-result-tree-tmpl">
  <li>
  {{if children.length}}
- <div class="name" style="padding-left: ${depth * 18 + 5}px">
- <a href="#" class="expand" id="@@prefix@@-req-profile-${id}">${name}</a> 
+ <div class="name" style="padding-left: ${depth * 18 + 5}px; overflow-x: hidden; white-space: nowrap; text-overflow: ellipsis;">
+ <a href="#" class="expand" title="${name}" id="@@prefix@@-req-profile-${id}">${name}</a>
  {{else}}
- <div class="name" style="padding-left: ${depth * 18 + 23}px">
+ <div class="name" style="padding-left: ${depth * 18 + 23}px; word-wrap: break-word;">
  ${name}
  {{/if}}
  </div><div class="time">${(duration / 1000000).toFixed(2)}
