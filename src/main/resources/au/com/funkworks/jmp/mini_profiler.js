@@ -7,12 +7,12 @@ var MiniProfiler = ( function() {
   function init( options ) {
     baseURL = options.baseURL;
 
-    $( document.body ).append( '<div id="@@prefix@@" style="display: none;"></div><div id="@@prefix@@-req" style="display: none;"></div>' );
+    jQuery( document.body ).append( '<div id="@@prefix@@" style="display: none;"></div><div id="@@prefix@@-req" style="display: none;"></div>' );
 
     // Initialize the HTML templates
-    $.template( 'requestTemplate', $( '#@@prefix@@-request-tmpl' ).html() );
-    $.template( 'resultTemplate', $( '#@@prefix@@-result-tmpl' ).html() );
-    $.template( 'resultTreeTemplate', $( '#@@prefix@@-result-tree-tmpl' ).html() );
+    jQuery.template( 'requestTemplate', jQuery( '#@@prefix@@-request-tmpl' ).html() );
+    jQuery.template( 'resultTemplate', jQuery( '#@@prefix@@-result-tmpl' ).html() );
+    jQuery.template( 'resultTreeTemplate', jQuery( '#@@prefix@@-result-tree-tmpl' ).html() );
 
     var requestIds = getRedirectRequests( window.location.href );
     requestIds.push( options.requestId );
@@ -20,7 +20,7 @@ var MiniProfiler = ( function() {
 
     // Dynamically add profile information for any Ajax requets that happen on
     // this page
-    $( document ).ajaxComplete( function( e, xhr, settings ) {
+    jQuery( document ).ajaxComplete( function( e, xhr, settings ) {
       if ( xhr ) {
         var requestId = xhr.getResponseHeader( 'X-Mini-Profile-Request-Id' );
         if ( requestId ) {
@@ -30,7 +30,7 @@ var MiniProfiler = ( function() {
     } );
 
     // Display profile details when one of the request times is clicked on
-    $( '#@@prefix@@' ).delegate( 'a', 'click', displayProfileDetails );
+    jQuery( '#@@prefix@@' ).delegate( 'a', 'click', displayProfileDetails );
   }
 
   /**
@@ -55,7 +55,7 @@ var MiniProfiler = ( function() {
    * Get profile information for the specified request id via an Ajax request.
    */
   function getProfileInformation( requestIds, type, callback ) {
-    $.get( baseURL + 'results', {
+    jQuery.get( baseURL + 'results', {
       ids : requestIds.join( ',' )
     }, function( data ) {
       if ( data.ok ) {
@@ -67,7 +67,7 @@ var MiniProfiler = ( function() {
             // Store the request data for later
             requestData[ '@@prefix@@-req-' + request.id ] = request;
             // Add the request to the display
-            $( '#@@prefix@@' ).show().append( $.tmpl( 'requestTemplate', {
+            jQuery( '#@@prefix@@' ).show().append( jQuery.tmpl( 'requestTemplate', {
               type : request.redirect ? 'redirect' : type, requestId : request.id, totalTime : ( request.profile.duration / 1000000 ).toFixed( 2 )
             } ) );
           }
@@ -85,13 +85,13 @@ var MiniProfiler = ( function() {
   function toggleLinkDetails( e ) {
     e.preventDefault();
     e.stopPropagation();
-    var el = $( this );
+    var el = jQuery( this );
     if ( el.hasClass( 'expand' ) ) {
-      $( '#' + this.id + '-d' ).slideDown();
+      jQuery( '#' + this.id + '-d' ).slideDown();
       el.removeClass( 'expand' ).addClass( 'collapse' );
     }
     else {
-      $( '#' + this.id + '-d' ).slideUp();
+      jQuery( '#' + this.id + '-d' ).slideUp();
       el.removeClass( 'collapse' ).addClass( 'expand' );
     }
   }
@@ -103,9 +103,9 @@ var MiniProfiler = ( function() {
     e.preventDefault();
     e.stopPropagation();
     var data = requestData[ this.id ];
-    var resultDiv = $( '#@@prefix@@-req' );
+    var resultDiv = jQuery( '#@@prefix@@-req' );
     resultDiv.undelegate();
-    resultDiv.html( $.tmpl( 'resultTemplate', data ) ).slideDown();
+    resultDiv.html( jQuery.tmpl( 'resultTemplate', data ) ).slideDown();
     resultDiv.delegate( '#@@prefix@@-req-close', 'click', function( e ) {
       e.preventDefault();
       e.stopPropagation();
